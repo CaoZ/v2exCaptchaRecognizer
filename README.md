@@ -10,13 +10,17 @@
 
 ![image](https://user-images.githubusercontent.com/34030605/33271369-ffd3ada0-d3c1-11e7-800c-be32b1b62729.png)  
 
-4. 所以可以进行多次识别进行比较来增加准确度。图片数在10张左右时，准确率已经可以接受；当图片数超过20张时，几乎达到了100%的准确度。 
+4. 所以可以进行多次识别进行比较来增加准确度。图片数在10张左右时，准确率已经可以接受；当图片数超过20张时，几乎达到了100%的准确度，完全可以用作自动登录。 
 
 # 实现步骤 
 1. 获取 N 张验证码图片
 1. 使用 Canvas 将多张图片组合成一张
-1. 使用 **[百度OCR](https://cloud.baidu.com/doc/OCR/index.html)** 或者 **[GOOGLE CLOUD VISION](https://cloud.google.com/vision/?hl=zh_CN)** API 进行在线识别
+1. 使用 **[百度 OCR](https://cloud.baidu.com/doc/OCR/index.html)** 或者 **[GOOGLE CLOUD VISION](https://cloud.google.com/vision/?hl=zh_CN)** API 进行在线识别
 1. 比较返回的结果列表，获取每个位置出现频次最高的字符
+
+# 关于百度 OCR 和 GOOGLE CLOUD VISION
+1. 前者容错高，后者精度高。通俗点来说，前者给多么混乱的图片，都会尝试识别并返回出点什么结果来，后者则更容易返回空结果；但是同样条件下，后者返回的结果更精确。
+1. 前者**每天**有 500 条免费额度，所以扩展里自带了一个百度 OCR 的 AppId ，可以开包即用。而后者**每个月**只有 1000 条免费额度，没有包含，可以在 Popup 里自己设置。
 
 # Thanks to
 1. Angular 4 
