@@ -1,0 +1,135 @@
+<form [formGroup]="optionForm">
+    <section class="form-block">
+        <span>
+            <h3 class="d-inline">常规设置</h3>
+        </span>
+        <div class="form-group">
+            <label>是否启用扩展？</label>
+            <div class="toggle-switch">
+                <input type="checkbox" id="toggle_1" formControlName="isenable">
+                <label for="toggle_1">开启</label>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label>
+                准确度（图片识别数）
+                <a role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-bottom-right">
+                    <clr-icon shape="help" size="16"></clr-icon>
+                    <span class="tooltip-content">
+                        <ol class="list">
+                            <li>
+                                v2ex刷新验证码时会给出文本相同，但是内容重绘过的图片</li>
+                            <li>
+                                针对这些不同的图片进行多次识别后校验，会增加准确度</li>
+                            <li>
+                                10张左右准确度已经很高，不建议太高或者太低</li>
+                        </ol>
+                    </span>
+                </a>
+            </label>
+            <label role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-top-left" [class.invalid]="picnum.invalid">
+                <input type="number" placeholder="" min="3" max="20" formControlName="picnum">
+                <span class="tooltip-content" *ngIf="picnum.invalid && (picnum.touched)">
+                    <label *ngIf="picnum.errors.required" class="d-block">
+                        此字段不能为空
+                    </label>
+                    <label *ngIf="picnum.errors.min || picnum.errors.max" class="d-block">
+                        值必须在3-20之间
+                    </label>
+                </span>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                Api类型
+                <a role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-bottom-right">
+                    <clr-icon shape="help" size="16"></clr-icon>
+                    <span class="tooltip-content">
+                        <ol class="list">
+                            <li>
+                                可以使用百度或者谷歌Api来进行图片识别</li>
+                            <li>
+                                百度每天500条免费额度，所以默认内置了一个APPID，建议修改成自己的</li>
+                            <li>
+                                谷歌每个月只有1000条免费额度，而且绑了信用卡，所以没有内置，可以自己申请填写</li>
+                        </ol>
+                    </span>
+                </a>
+            </label>
+            <div class="radio-inline">
+                <input type="radio" id="apitype1" formControlName="apitype" [value]="ApiType.baiduocr">
+                <label for="apitype1">Baidu Ocr</label>
+            </div>
+            <div class="radio-inline">
+                <input type="radio" id="apitype2" formControlName="apitype" [value]="ApiType.googlevision">
+                <label for="apitype2">Google vision</label>
+            </div>
+        </div>
+    </section>
+    <section class="form-block" [hidden]="apitype.value!=ApiType.baiduocr">
+        <span>
+            <h3 class="d-inline">Baidu Ocr</h3>
+            <button class="btn btn-link" (click)="outlink(0)">点此申请</button>
+        </span>
+        <div class="form-group">
+            <label>APP_ID</label>
+            <label role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-top-left" [class.invalid]="baidu_appid.invalid">
+                <input type="text" placeholder="APP_ID" formControlName="baidu_appid">
+                <span class="tooltip-content" *ngIf="baidu_appid.invalid && (baidu_appid.touched)">
+                    <label *ngIf="baidu_appid.errors.required" class="d-block">
+                        此字段不能为空
+                    </label>
+                </span>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>API_KEY</label>
+            <label role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-top-left" [class.invalid]="baidu_appkey.invalid">
+                <input type="text" placeholder="API_KEY" formControlName="baidu_appkey">
+                <span class="tooltip-content" *ngIf="baidu_appkey.invalid && (baidu_appkey.touched)">
+                    <label *ngIf="baidu_appkey.errors.required" class="d-block">
+                        此字段不能为空
+                    </label>
+                </span>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>SECRET_KEY</label>
+            <label role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-top-left" [class.invalid]="baidu_appsecret.invalid">
+                <input type="password" placeholder="SECRET_KEY" formControlName="baidu_appsecret">
+                <span class="tooltip-content" *ngIf="baidu_appsecret.invalid && (baidu_appsecret.touched)">
+                    <label *ngIf="baidu_appsecret.errors.required" class="d-block">
+                        此字段不能为空
+                    </label>
+                </span>
+            </label>
+        </div>
+    </section>
+    <section class="form-block" [hidden]="apitype.value!=ApiType.googlevision">
+        <span>
+            <h3 class="d-inline">Google vision</h3>
+            <button class="btn btn-link" (click)="outlink(1)">点此申请</button>
+        </span>
+        <div class="form-group">
+            <label>Secret Key</label>
+            <label role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-top-left" [class.invalid]="google_appsecret.invalid">
+                <input type="text" placeholder="Secret Key" formControlName="google_appsecret">
+                <span class="tooltip-content" *ngIf="google_appsecret.invalid && (google_appsecret.touched)">
+                    <label *ngIf="google_appsecret.errors.required" class="d-block">
+                        此字段不能为空
+                    </label>
+                </span>
+            </label>
+        </div>
+    </section>
+    <clr-alert clrAlertType="alert-danger" [clrAlertAppLevel]="true" [(clrAlertClosed)]="msg_closed">
+        <div clr-alert-item class="alert-item">
+            <span class="alert-text">
+                {{msg}}
+            </span>
+        </div>
+    </clr-alert>
+    <button type="submit" class="btn btn-primary-outline stretch" [clrLoading]="loading" [disabled]="picnum.invalid || (apitype.value==ApiType.baiduocr && (baidu_appid.invalid || baidu_appkey.invalid || baidu_appsecret.invalid) ) || (apitype.value==ApiType.googlevision && google_appsecret.invalid) || loading"
+        (click)="confirmsetting()">确认修改</button>
+</form>

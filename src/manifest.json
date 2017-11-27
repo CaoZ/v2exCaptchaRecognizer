@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+  "name": "V2ex captcha recognizer",
+  "version": "1.0.0",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "<all_urls>"
+  ],
+  "background": {
+    "page": "index.html#/event-page",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.v2ex.com/signup",
+        "https://www.v2ex.com/signin",
+        "https://www.v2ex.com/forgot"
+      ],
+      "js": [
+        "content-script.js"
+      ],
+      "css": [
+        "content-style.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "V2ex captcha recognizer options",
+    "default_popup": "index.html#/popup"
+  },
+  "icons": {
+    "16": "assets/icons8-search-16.png",
+    "48": "assets/icons8-search-48.png",
+    "128": "assets/icons8-search-128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com; object-src 'self'"
+}
