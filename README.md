@@ -1,6 +1,8 @@
 # V2ex Captcha Recognizer Extension  
 自动识别并填写 V2EX **[注册](https://www.v2ex.com/signup)** / **[登录](https://www.v2ex.com/signin)** / **[重设密码](https://www.v2ex.com/forgot)** 等页面的验证码
 
+![image](https://raw.githubusercontent.com/gragrance/v2exCaptchaRecognizer/master/screenshot.gif)
+
 # 实现原理  
 1. V2EX的验证码的设计在 **阻挠肉眼识别** 和 **便于模式识别** 两方面都达到了很高的水准。前者无需赘言，后者用之前项目做过的本地模式识别库简单测试，识别率非常高。
 
