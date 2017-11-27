@@ -41,4 +41,4 @@ To build the project you need to run the following node commands:
 node-gyp 在 Windows 上 Build 需要 **[Python 2.7](https://www.python.org/downloads/)** 和 **[Visual C++ Build Tools](https://download.microsoft.com/download/E/E/D/EEDF18A8-4AED-4CE0-BEBE-70A83094FC5A/BuildTools_Full.exe)**
 
 # Release  
-不想安装环境或者不想 Build 的，可以直接到 Release 下载扩展包，在 [扩展页面 chrome://extensions/](chrome://extensions/) 加载已解压的扩展程序即可。
+不想安装环境或者不想 Build 的，可以直接到 **[Release](https://github.com/gragrance/v2exCaptchaRecognizer/releases)** 下载扩展包，在 [扩展页面 chrome://extensions/](chrome://extensions/) 加载已解压的扩展程序即可。
